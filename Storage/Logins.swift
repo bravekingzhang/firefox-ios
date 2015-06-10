@@ -13,6 +13,7 @@ private var log = XCGLogger.defaultInstance()
  * LoginData is a wrapper around NSURLCredential and NSURLProtectionSpace to allow us to add extra fields where needed.
  **/
 public protocol LoginData {
+    var guid: String { get set }                 // It'd be nice if this were read-only.
     var credentials: NSURLCredential { get }
     var protectionSpace: NSURLProtectionSpace { get }
     var hostname: String { get }
@@ -24,6 +25,8 @@ public protocol LoginData {
     var passwordField: String? { get set }
 
     func toDict() -> [String: String]
+
+    func significantlyDiffersFrom(login: LoginData) -> Bool
 }
 
 public protocol LoginUsageData {
@@ -33,11 +36,12 @@ public protocol LoginUsageData {
 }
 
 public protocol SyncableLoginData {
-    var guid: String? { get set }
     var isDeleted: Bool { get set }
 }
 
 public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equatable {
+    public var guid: String
+
     public let credentials: NSURLCredential
     public let protectionSpace: NSURLProtectionSpace
 
@@ -69,7 +73,6 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
     }
 
     // SyncableLoginData
-    public var guid: String? = nil
     public var isDeleted: Bool = false
 
     // LoginUsageData
@@ -82,6 +85,16 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
         return "Login for \(hostname)"
     }
 
+    // Essentially: should we sync a change?
+    // Desktop ignores usernameField and hostnameField.
+    public func significantlyDiffersFrom(login: LoginData) -> Bool {
+        return login.password != self.password ||
+               login.hostname != self.hostname ||
+               login.username != self.username ||
+               login.formSubmitUrl != self.formSubmitUrl ||
+               login.httpRealm != self.httpRealm
+    }
+
     public class func createWithHostname(hostname: String, username: String, password: String) -> LoginData {
         return Login(hostname: hostname, username: username, password: password) as LoginData
     }
@@ -91,11 +104,13 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
     }
 
     init(hostname: String, username: String, password: String) {
+        self.guid = Bytes.generateGUID()
         self.credentials = NSURLCredential(user: username, password: password, persistence: NSURLCredentialPersistence.None)
         self.protectionSpace = NSURLProtectionSpace(host: hostname, port: 0, `protocol`: nil, realm: nil, authenticationMethod: nil)
     }
 
     init(credential: NSURLCredential, protectionSpace: NSURLProtectionSpace) {
+        self.guid = Bytes.generateGUID()
         self.credentials = credential
         self.protectionSpace = protectionSpace
     }
@@ -159,13 +174,42 @@ public func ==(lhs: Login, rhs: Login) -> Bool {
 }
 
 public protocol BrowserLogins {
-    func getUsageDataForLogin(login: LoginData) -> Deferred<Result<LoginUsageData>>
+    func getUsageDataForLoginByGUID(guid: GUID) -> Deferred<Result<LoginUsageData>>
     func getLoginsForProtectionSpace(protectionSpace: NSURLProtectionSpace) -> Deferred<Result<Cursor<LoginData>>>
+    func getLoginsForProtectionSpace(protectionSpace: NSURLProtectionSpace, withUsername username: String?) -> Deferred<Result<Cursor<LoginData>>>
+
+    // Add a new login regardless of whether other logins might match some fields. Callers
+    // are responsible for querying first if they care.
     func addLogin(login: LoginData) -> Success
-    func updateLogin(login: LoginData) -> Success
-    func addUseOf(login: LoginData) -> Success
-    func removeLogin(login: LoginData) -> Success
+
+    func updateLoginByGUID(guid: GUID, new: LoginData, significant: Bool) -> Success
+
+    // Update based on username, hostname, httpRealm, formSubmitUrl.
+    //func updateLogin(login: LoginData) -> Success
+
+    // Add the use of a login by GUID.
+    func addUseOfLoginByGUID(guid: GUID) -> Success
+    func removeLoginByGUID(guid: GUID) -> Success
+
     func removeAll() -> Success
+}
+
+public protocol SyncableLogins {
+    /**
+     * Delete the login with the provided GUID. Succeeds if the GUID is unknown.
+     */
+    func deleteByGUID(guid: GUID, deletedAt: Timestamp) -> Success
+
+    /**
+     * Chains through the provided timestamp.
+     */
+    func markAsSynchronized([GUID], modified: Timestamp) -> Deferred<Result<Timestamp>>
+    func markAsDeleted(guids: [GUID]) -> Success
+
+    /**
+     * Clean up any metadata.
+     */
+    func onRemovedAccount() -> Success
 }
 
 public class LoginDataError: ErrorType {
