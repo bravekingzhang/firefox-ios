@@ -111,10 +111,14 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
         return Login(credential: credential, protectionSpace: protectionSpace) as LoginData
     }
 
-    init(hostname: String, username: String, password: String) {
-        self.guid = Bytes.generateGUID()
+    public init(guid: String, hostname: String, username: String, password: String) {
+        self.guid = guid
         self.credentials = NSURLCredential(user: username, password: password, persistence: NSURLCredentialPersistence.None)
         self.protectionSpace = NSURLProtectionSpace(host: hostname, port: 0, `protocol`: nil, realm: nil, authenticationMethod: nil)
+    }
+
+    convenience init(hostname: String, username: String, password: String) {
+        self.init(guid: Bytes.generateGUID(), hostname: hostname, username: username, password: password)
     }
 
     init(credential: NSURLCredential, protectionSpace: NSURLProtectionSpace) {
