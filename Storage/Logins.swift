@@ -212,7 +212,10 @@ public protocol SyncableLogins {
      */
     func deleteByGUID(guid: GUID, deletedAt: Timestamp) -> Success
 
+    func applyChangedLogin(login: Login) -> Success
+
     /**
+     * TODO: these might need some work.
      * Chains through the provided timestamp.
      */
     func markAsSynchronized([GUID], modified: Timestamp) -> Deferred<Result<Timestamp>>

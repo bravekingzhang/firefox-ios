@@ -423,12 +423,62 @@ public class SQLiteLogins: BrowserLogins {
     }
 }
 
+
+// If it's not deleted, let's make sure we're using the same GUID locally for this login.
 // TODO
+
+// When a server change is detected (e.g., syncID changes), we should consider shifting the contents
+// of the mirror into the local overlay, allowing a content-based reconciliation to occur on the next
+// full sync. Or we could flag the mirror as to-clear, download the server records and un-clear, and
+// resolve the remainder on completion. This assumes that a fresh start will typically end up with
+// the exact same records, so we might as well keep the shared parents around and double-check.
 extension SQLiteLogins: SyncableLogins {
     /**
      * Delete the login with the provided GUID. Succeeds if the GUID is unknown.
      */
     public func deleteByGUID(guid: GUID, deletedAt: Timestamp) -> Success {
+        // Simply ignore the possibility of a conflicting local change for now.
+        let local = "DELETE FROM \(TableLoginsLocal) WHERE guid = ?"
+        let remote = "DELETE FROM \(TableLoginsMirror) WHERE guid = ?"
+        let args: Args = [guid]
+
+        return self.db.run(local, withArgs: args) >>> { self.db.run(remote, withArgs: args) }
+    }
+
+    public func applyChangedLogin(login: Login) -> Success {
+        // Our login storage tracks the shared parent from the last sync (the "mirror").
+        // This allows us to conclusively determine what changed in the case of conflict.
+        //
+        // Our first step is to determine whether the record is changed or new: i.e., whether
+        // or not it's present in the mirror.
+        //
+        // If it's present in the mirror, then we can proceed directly to handling the change;
+        // we assume that once a record makes it into the mirror, that the local record association
+        // has already taken place.
+        //
+        // If it's not present, we must first check whether we have a local record that's substantially
+        // the same -- the co-creation or re-sync case.
+        //
+        // In this case, we apply the server record to the mirror, change the local record's GUID,
+        // and proceed to reconcile the change on a content basis.
+        //
+        // Once we have the server record, the mirror record (if any), and the local overlay (if any),
+        // we can always know which state a record is in:
+        //
+        // * New remotely only; no local overlay or shared parent in the mirror. Insert it in the mirror.
+        //
+        // * New both locally and remotely with no shared parent (cocreation). Do a content-based merge
+        //   and apply the results remotely, writing the result into the mirror and discarding the overlay
+        //   if the upload succeeded. (Doing it in this order allows us to safely replay on failure.)
+        //   If the local and remote record are the same, this is trivial.
+        //   At this point we also switch our local GUID to match the remote.
+        //
+        // * Changed remotely but not locally. Apply the remote changes to the local mirror. There will be
+        //   no local overlay, by definition.
+        //
+        // * Changed remotely and locally (conflict). Resolve the conflict using a three-way merge: the
+        //   local mirror is the shared parent of both the local overlay and the new remote record.
+        //   Apply results as in the co-creation case.
         return succeed()
     }
 

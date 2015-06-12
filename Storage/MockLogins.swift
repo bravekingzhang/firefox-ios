@@ -90,6 +90,7 @@ public class MockLogins: BrowserLogins, SyncableLogins {
 
     // TODO
     public func deleteByGUID(guid: GUID, deletedAt: Timestamp) -> Success { return succeed() }
+    public func applyChangedLogin(login: Login) -> Success { return succeed() }
     public func markAsSynchronized([GUID], modified: Timestamp) -> Deferred<Result<Timestamp>> { return deferResult(0) }
     public func markAsDeleted(guids: [GUID]) -> Success { return succeed() }
     public func onRemovedAccount() -> Success { return succeed() }

@@ -66,35 +66,7 @@ public class LoginsSynchronizer: IndependentRecordSynchronizer, Synchronizer {
                 return storage.deleteByGUID(guid, deletedAt: modified)
             }
 
-            // If it's not deleted, let's make sure we're using the same GUID locally for this login.
-            // TODO
-
-            // Our login storage tracks the shared parent from the last sync (the "mirror").
-            // This allows us to conclusively determine what changed in the case of conflict.
-            //
-            // Once we know that we have a GUID collision for matching records, we can always know which state
-            // a record is in:
-            //
-            // * New remotely only; no local overlay or shared parent in the mirror. Insert it in the mirror.
-            //
-            // * New both locally and remotely with no shared parent (cocreation). Do a content-based merge
-            //   and apply the results remotely, writing the result into the mirror and discarding the overlay
-            //   if the upload succeeded. (Doing it in this order allows us to safely replay on failure.)
-            //   If the local and remote record are the same, this is trivial.
-            //
-            // * Changed remotely but not locally. Apply the remote changes to the local mirror. There will be
-            //   no local overlay, by definition.
-            //
-            // * Changed remotely and locally (conflict). Resolve the conflict using a three-way merge: the
-            //   local mirror is the shared parent of both the local overlay and the new remote record.
-            //   Apply results as in the co-creation case.
-            //
-            // When a server change is detected (e.g., syncID changes), we should consider shifting the contents
-            // of the mirror into the local overlay, allowing a content-based reconciliation to occur on the next
-            // full sync. Or we could flag the mirror as to-clear, download the server records and un-clear, and
-            // resolve the remainder on completion. This assumes that a fresh start will typically end up with
-            // the exact same records, so we might as well keep the shared parents around and double-check.
-            return succeed()
+            return storage.applyChangedLogin(self.getLogin(rec))
         }
 
         return self.applyIncomingToStorage(records, fetched: fetched, apply: applyRecord)
