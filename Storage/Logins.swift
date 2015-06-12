@@ -20,7 +20,7 @@ public protocol LoginData {
     var username: String? { get }
     var password: String { get }
     var httpRealm: String? { get set }
-    var formSubmitUrl: String? { get set }
+    var formSubmitURL: String? { get set }
     var usernameField: String? { get set }
     var passwordField: String? { get set }
 
@@ -57,17 +57,17 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
         set { self._httpRealm = newValue }
     }
 
-    public var formSubmitUrl: String? = nil {
+    public var formSubmitURL: String? = nil {
         didSet {
-            if self.formSubmitUrl == nil || self.formSubmitUrl!.isEmpty {
+            if self.formSubmitURL == nil || self.formSubmitURL!.isEmpty {
                 return
             }
 
             let url2 = NSURL(string: self.hostname)
-            let url1 = NSURL(string: self.formSubmitUrl!)
+            let url1 = NSURL(string: self.formSubmitURL!)
             if url1?.host != url2?.host {
                 assertionFailure("Form submit url domain doesn't match login's domain")
-                formSubmitUrl = nil
+                formSubmitURL = nil
             }
         }
     }
@@ -91,7 +91,7 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
         return login.password != self.password ||
                login.hostname != self.hostname ||
                login.username != self.username ||
-               login.formSubmitUrl != self.formSubmitUrl ||
+               login.formSubmitURL != self.formSubmitURL ||
                login.httpRealm != self.httpRealm
     }
 
@@ -118,7 +118,7 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
     public func toDict() -> [String: String] {
         return [
             "hostname": hostname,
-            "formSubmitURL": formSubmitUrl ?? "",
+            "formSubmitURL": formSubmitURL ?? "",
             "httpRealm": httpRealm ?? "",
             "username": username ?? "",
             "password": password,
@@ -130,8 +130,8 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
     public class func fromScript(url: NSURL, script: [String: String]) -> LoginData {
         let login = Login(hostname: getPasswordOrigin(url.absoluteString!)!, username: script["username"]!, password: script["password"]!)
 
-        if let formSubmit = script["formSubmitUrl"] {
-            login.formSubmitUrl = formSubmit
+        if let formSubmit = script["formSubmitURL"] {
+            login.formSubmitURL = formSubmit
         }
 
         if let passwordField = script["passwordField"] {
@@ -184,7 +184,7 @@ public protocol BrowserLogins {
 
     func updateLoginByGUID(guid: GUID, new: LoginData, significant: Bool) -> Success
 
-    // Update based on username, hostname, httpRealm, formSubmitUrl.
+    // Update based on username, hostname, httpRealm, formSubmitURL.
     //func updateLogin(login: LoginData) -> Success
 
     // Add the use of a login by GUID.

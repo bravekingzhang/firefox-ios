@@ -42,7 +42,7 @@ private class LoginsTable: Table {
         "id INTEGER PRIMARY KEY AUTOINCREMENT" +
         ", hostname TEXT NOT NULL" +
         ", httpRealm TEXT" +
-        ", formSubmitUrl TEXT" +
+        ", formSubmitURL TEXT" +
         ", usernameField TEXT" +
         ", passwordField TEXT" +
         ", timeCreated INTEGER NOT NULL" +
@@ -117,7 +117,7 @@ public class SQLiteLogins: BrowserLogins {
             authenticationMethod: nil)
 
         let login = Login(credential: c, protectionSpace: protectionSpace)
-        login.formSubmitUrl = row["formSubmitUrl"] as? String
+        login.formSubmitURL = row["formSubmitURL"] as? String
         login.usernameField = row["usernameField"] as? String
         login.passwordField = row["passwordField"] as? String
         login.guid = row["guid"] as! String
@@ -142,7 +142,7 @@ public class SQLiteLogins: BrowserLogins {
     }
 
     public func getLoginsForProtectionSpace(protectionSpace: NSURLProtectionSpace) -> Deferred<Result<Cursor<LoginData>>> {
-        let projection = "guid, username, password, hostname, httpRealm, formSubmitUrl, usernameField, passwordField, timeLastUsed"
+        let projection = "guid, username, password, hostname, httpRealm, formSubmitURL, usernameField, passwordField, timeLastUsed"
 
         let sql =
         "SELECT \(projection) FROM " +
@@ -158,7 +158,7 @@ public class SQLiteLogins: BrowserLogins {
 
     // username is really Either<String, NULL>; we explicitly match no username.
     public func getLoginsForProtectionSpace(protectionSpace: NSURLProtectionSpace, withUsername username: String?) -> Deferred<Result<Cursor<LoginData>>> {
-        let projection = "guid, username, password, hostname, httpRealm, formSubmitUrl, usernameField, passwordField, timeLastUsed"
+        let projection = "guid, username, password, hostname, httpRealm, formSubmitURL, usernameField, passwordField, timeLastUsed"
 
         let args: Args
         let usernameMatch: String
@@ -182,7 +182,7 @@ public class SQLiteLogins: BrowserLogins {
     }
 
     public func getUsageDataForLoginByGUID(guid: GUID) -> Deferred<Result<LoginUsageData>> {
-        let projection = "guid, username, password, hostname, httpRealm, formSubmitUrl, usernameField, passwordField, timeCreated, timeLastUsed, timePasswordChanged"
+        let projection = "guid, username, password, hostname, httpRealm, formSubmitURL, usernameField, passwordField, timeCreated, timeLastUsed, timePasswordChanged"
 
         let sql =
         "SELECT \(projection) FROM " +
@@ -203,7 +203,7 @@ public class SQLiteLogins: BrowserLogins {
         var args: Args = [
             login.hostname,
             login.httpRealm,
-            login.formSubmitUrl,
+            login.formSubmitURL,
             login.usernameField,
             login.passwordField,
         ]
@@ -226,7 +226,7 @@ public class SQLiteLogins: BrowserLogins {
         // Shared fields.
         "( hostname" +
         ", httpRealm" +
-        ", formSubmitUrl" +
+        ", formSubmitURL" +
         ", usernameField" +
         ", passwordField" +
         ", timeCreated" +
@@ -253,7 +253,7 @@ public class SQLiteLogins: BrowserLogins {
         "guid " +
         ", hostname" +
         ", httpRealm" +
-        ", formSubmitUrl" +
+        ", formSubmitURL" +
         ", usernameField" +
         ", passwordField" +
         ", timeCreated" +
@@ -323,7 +323,7 @@ public class SQLiteLogins: BrowserLogins {
         var args: Args = [
             dateMilli,            // local_modified
             login.httpRealm,
-            login.formSubmitUrl,
+            login.formSubmitURL,
             login.usernameField,
             login.passwordField,
             dateMicro,            // timeLastUsed
@@ -335,7 +335,7 @@ public class SQLiteLogins: BrowserLogins {
 
         let sql =
         "  local_modified = ?" +
-        ", httpRealm = ?, formSubmitUrl = ?, usernameField = ?" +
+        ", httpRealm = ?, formSubmitURL = ?, usernameField = ?" +
         ", passwordField = ?, timeLastUsed = ?, timePasswordChanged = ?, password = ?" +
         ", hostname = ?, username = ?" +
         (significant ? ", should_upload = 1 " : "")
@@ -360,7 +360,7 @@ public class SQLiteLogins: BrowserLogins {
     }
 
     /*
-    /// Update based on username, hostname, httpRealm, formSubmitUrl.
+    /// Update based on username, hostname, httpRealm, formSubmitURL.
     public func updateLogin(login: LoginData) -> Success {
         // TODO
 
@@ -370,7 +370,7 @@ public class SQLiteLogins: BrowserLogins {
         let dateMilli = NSNumber(unsignedLongLong: nowMilli)
         let args: Args = [
             login.httpRealm,
-            login.formSubmitUrl,
+            login.formSubmitURL,
             login.usernameField,
             login.passwordField,
             dateMicro, // timePasswordChanged
@@ -381,7 +381,7 @@ public class SQLiteLogins: BrowserLogins {
         ]
 
         return succeed()
-        //return db.run("UPDATE \(table.name) SET httpRealm = ?, formSubmitUrl = ?, usernameField = ?, passwordField = ?, timePasswordChanged = ?, password = ? WHERE hostname = ? AND username IS ?", withArgs: args)
+        //return db.run("UPDATE \(table.name) SET httpRealm = ?, formSubmitURL = ?, usernameField = ?, passwordField = ?, timePasswordChanged = ?, password = ? WHERE hostname = ? AND username IS ?", withArgs: args)
     }
 */
 
