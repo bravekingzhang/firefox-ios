@@ -12,6 +12,11 @@ protocol BrowserLocationViewDelegate {
     func browserLocationViewDidLongPressReaderMode(browserLocationView: BrowserLocationView)
 }
 
+private struct BrowserLocationViewUX {
+    static let HostFontColor = UIColor.darkGrayColor()
+    static let BaseURLFontColor = UIColor.lightGrayColor()
+}
+
 class BrowserLocationView : UIView, UIGestureRecognizerDelegate {
     var delegate: BrowserLocationViewDelegate?
 
@@ -38,6 +43,7 @@ class BrowserLocationView : UIView, UIGestureRecognizerDelegate {
 
         locationLabel = UILabel()
         locationLabel.font = AppConstants.DefaultMediumFont
+        locationLabel.textColor = BrowserLocationViewUX.BaseURLFontColor
         locationLabel.lineBreakMode = .ByClipping
         locationLabel.userInteractionEnabled = true
         locationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -132,13 +138,23 @@ class BrowserLocationView : UIView, UIGestureRecognizerDelegate {
     var url: NSURL? {
         didSet {
             lockImageView.hidden = (url?.scheme != "https")
-            if let url = url?.absoluteString {
-                if url.hasPrefix("http://") ?? false {
-                    locationLabel.text = url.substringFromIndex(advance(url.startIndex, 7))
-                } else if url.hasPrefix("https://") ?? false {
-                    locationLabel.text = url.substringFromIndex(advance(url.startIndex, 8))
+
+            if let urlString = url?.absoluteString {
+
+                var truncatedURL: String
+                if let scheme = url?.scheme {
+                    truncatedURL = urlString.substringFromIndex(advance(urlString.startIndex, count(scheme) + count("://")))
                 } else {
-                    locationLabel.text = url
+                    truncatedURL = urlString
+                }
+                locationLabel.text = truncatedURL
+
+                if let host = url?.host {
+                    let nsTruncatedURL = truncatedURL as NSString
+                    let hostRange = nsTruncatedURL.rangeOfString(host)
+                    var attributedURLString = NSMutableAttributedString(string: truncatedURL)
+                    attributedURLString.addAttribute(NSForegroundColorAttributeName, value: BrowserLocationViewUX.HostFontColor, range: hostRange)
+                    locationLabel.attributedText = attributedURLString
                 }
             } else {
                 locationLabel.attributedText = BrowserLocationView.PlaceholderText
