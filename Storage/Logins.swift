@@ -48,27 +48,35 @@ public class Login: Printable, SyncableLoginData, LoginData, LoginUsageData, Equ
     public var hostname: String { return protectionSpace.host }
     public var username: String? { return credentials.user }
     public var password: String { return credentials.password! }
-    private var _httpRealm: String? = nil
     public var usernameField: String? = nil
     public var passwordField: String? = nil
 
+    private var _httpRealm: String? = nil
     public var httpRealm: String? {
         get { return self._httpRealm ?? protectionSpace.realm }
         set { self._httpRealm = newValue }
     }
 
-    public var formSubmitURL: String? = nil {
-        didSet {
-            if self.formSubmitURL == nil || self.formSubmitURL!.isEmpty {
+    private var _formSubmitURL: String? = nil
+    public var formSubmitURL: String? {
+        get {
+            return self._formSubmitURL
+        }
+        set(value) {
+            if value == nil || value!.isEmpty {
+                self._formSubmitURL = nil
                 return
             }
 
             let url2 = NSURL(string: self.hostname)
-            let url1 = NSURL(string: self.formSubmitURL!)
+            let url1 = NSURL(string: value!)
+
             if url1?.host != url2?.host {
-                assertionFailure("Form submit url domain doesn't match login's domain")
-                formSubmitURL = nil
+                assertionFailure("Form submit URL domain doesn't match login's domain.")
+                self._formSubmitURL = nil
+                return
             }
+            self._formSubmitURL = value
         }
     }
 
