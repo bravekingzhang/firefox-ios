@@ -40,6 +40,34 @@ public class LoginPayload: CleartextPayloadJSON {
         return LoginPayload.RequiredStringFields.every({ self[$0].isString })
     }
 
+    public var hostname: String {
+        return self["hostname"].asString!
+    }
+
+    public var username: String {
+        return self["username"].asString!
+    }
+
+    public var password: String {
+        return self["password"].asString!
+    }
+
+    public var usernameField: String {
+        return self["usernameField"].asString!
+    }
+
+    public var passwordField: String {
+        return self["passwordField"].asString!
+    }
+
+    public var formSubmitURL: String? {
+        return self["formSubmitURL"].asString
+    }
+
+    public var httpRealm: String? {
+        return self["httpRealm"].asString
+    }
+
     override public func equalPayloads(obj: CleartextPayloadJSON) -> Bool {
         if let p = obj as? LoginPayload {
             if !super.equalPayloads(p) {
