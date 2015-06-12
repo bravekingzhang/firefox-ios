@@ -344,8 +344,10 @@ public class SQLiteLogins: BrowserLogins {
     }
 
     public func updateLoginByGUID(guid: GUID, new: LoginData, significant: Bool) -> Success {
-        // TODO: bump timePasswordChanged if it did in fact change.
-        // TODO: set changed fields!
+        // Right now this method is only ever called if the password changes at
+        // point of use, so we always set `timePasswordChanged` and `timeLastUsed`.
+        // We can (but don't) also assume that `significant` will always be `true`,
+        // at least for the time being.
         var (setClause, args) = self.getSETClauseForLoginData(new, significant: significant)
 
         let update =
@@ -410,7 +412,9 @@ public class SQLiteLogins: BrowserLogins {
         let update =
         "UPDATE \(TableLoginsLocal) SET local_modified = \(nowMillis), should_upload = 1, is_deleted = 1, password = '', hostname = '', username = '' WHERE is_deleted = 0"
 
-        // Copy all the remaining rows from our mirror, marking them as deleted.
+        // Copy all the remaining rows from our mirror, marking them as deleted. The
+        // OR IGNORE will cause conflicts due to non-unique guids to be dropped, preserving
+        // anything we already deleted.
         let insert =
         "INSERT OR IGNORE INTO \(TableLoginsLocal) (guid, local_modified, is_deleted, should_upload, hostname, timeCreated, timePasswordChanged, password, username) " +
         "SELECT guid, \(nowMillis) 1, 1, '', timeCreated, \(nowMillis)000, '', '' FROM \(TableLoginsMirror)"
