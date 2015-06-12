@@ -37,6 +37,23 @@ public class LoginsSynchronizer: IndependentRecordSynchronizer, Synchronizer {
         return PasswordsStorageVersion
     }
 
+    func getLogin(record: Record<LoginPayload>) -> Login {
+        let guid = record.id
+        let payload = record.payload
+        let modified = record.modified
+
+        let login = Login(guid: guid, hostname: payload.hostname, username: payload.username, password: payload.password)
+        login.formSubmitURL = payload.formSubmitURL
+        login.httpRealm = payload.httpRealm
+        login.usernameField = payload.usernameField
+        login.passwordField = payload.passwordField
+        login.timeCreated = 0               // TODO
+        login.timeLastUsed = 0              // TODO
+        login.timePasswordChanged = 0       // TODO
+
+        return login
+    }
+
     func applyIncomingToStorage(storage: SyncableLogins, records: [Record<LoginPayload>], fetched: Timestamp) -> Success {
         func applyRecord(rec: Record<LoginPayload>) -> Success {
             let guid = rec.id

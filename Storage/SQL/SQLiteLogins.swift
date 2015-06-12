@@ -427,7 +427,7 @@ public class SQLiteLogins: BrowserLogins {
 extension SQLiteLogins: SyncableLogins {
     /**
      * Delete the login with the provided GUID. Succeeds if the GUID is unknown.
-    */
+     */
     public func deleteByGUID(guid: GUID, deletedAt: Timestamp) -> Success {
         return succeed()
     }
