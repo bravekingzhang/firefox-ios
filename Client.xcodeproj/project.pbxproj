@@ -511,6 +511,10 @@
 		E65072A41B273824001A0AC6 /* GeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A99D761B20D95800006EDD /* GeometryExtensions.swift */; };
 		E68AEDB01B18F81A00133D99 /* SwipeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68AEDAF1B18F81A00133D99 /* SwipeAnimator.swift */; };
 		E6EAC5961B29CB3A00E1DE1E /* scrollablePage.html in Resources */ = {isa = PBXBuildFile; fileRef = E6EAC5951B29CB3A00E1DE1E /* scrollablePage.html */; };
+		E6F965121B2F1CF20034B023 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288A2D861AB8B3260023ABC3 /* Shared.framework */; };
+		E6F9653C1B2F1D5D0034B023 /* NSURLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9653B1B2F1D5D0034B023 /* NSURLExtensionsTests.swift */; };
+		E6F9653F1B2F242E0034B023 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */; };
+		E6F965421B2F25110034B023 /* NSAttributedStringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F965411B2F25110034B023 /* NSAttributedStringExtensionsTests.swift */; };
 		F84B21DA1A090F8100AAB793 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21D91A090F8100AAB793 /* ClientTests.swift */; };
 		F84B22041A0910F600AAB793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21E51A0910F600AAB793 /* AppDelegate.swift */; };
 		F84B220B1A0910F600AAB793 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84B21EF1A0910F600AAB793 /* Images.xcassets */; };
@@ -1000,6 +1004,20 @@
 			remoteGlobalIDString = 9CC9673B1AD4B1B600576D13;
 			remoteInfo = KIFFramework;
 		};
+		E6F965131B2F1CF20034B023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F84B21B61A090F8100AAB793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 288A2D851AB8B3260023ABC3;
+			remoteInfo = Shared;
+		};
+		E6F965391B2F1D330034B023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F84B21B61A090F8100AAB793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F84B21BD1A090F8100AAB793;
+			remoteInfo = Client;
+		};
 		F84B21D41A090F8100AAB793 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F84B21B61A090F8100AAB793 /* Project object */;
@@ -1434,6 +1452,11 @@
 		E68AEDAF1B18F81A00133D99 /* SwipeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeAnimator.swift; sourceTree = "<group>"; };
 		E6A99D761B20D95800006EDD /* GeometryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometryExtensions.swift; sourceTree = "<group>"; };
 		E6EAC5951B29CB3A00E1DE1E /* scrollablePage.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = scrollablePage.html; sourceTree = "<group>"; };
+		E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6F9650F1B2F1CF20034B023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6F9653B1B2F1D5D0034B023 /* NSURLExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLExtensionsTests.swift; sourceTree = "<group>"; };
+		E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
+		E6F965411B2F25110034B023 /* NSAttributedStringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionsTests.swift; sourceTree = "<group>"; };
 		F84B21BE1A090F8100AAB793 /* Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84B21D31A090F8100AAB793 /* FennecAurora.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FennecAurora.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84B21D81A090F8100AAB793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1555,6 +1578,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6F965091B2F1CF20034B023 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6F965121B2F1CF20034B023 /* Shared.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F84B21D01A090F8100AAB793 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1672,6 +1703,7 @@
 				D35275151AA8D13B00E9C906 /* UIColorExtensions.swift */,
 				0BB5B2BB1AC0AB9F0052877D /* UIImage+Extensions.swift */,
 				E6A99D761B20D95800006EDD /* GeometryExtensions.swift */,
+				E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2315,6 +2347,24 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E6F9650D1B2F1CF20034B023 /* SharedTests */ = {
+			isa = PBXGroup;
+			children = (
+				E6F9653B1B2F1D5D0034B023 /* NSURLExtensionsTests.swift */,
+				E6F965411B2F25110034B023 /* NSAttributedStringExtensionsTests.swift */,
+				E6F9650E1B2F1CF20034B023 /* Supporting Files */,
+			);
+			path = SharedTests;
+			sourceTree = "<group>";
+		};
+		E6F9650E1B2F1CF20034B023 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E6F9650F1B2F1CF20034B023 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F84B21B51A090F8100AAB793 = {
 			isa = PBXGroup;
 			children = (
@@ -2344,6 +2394,7 @@
 				E4D567191ADECE2700F1EFE7 /* ReadingList */,
 				E4D567281ADECE2800F1EFE7 /* ReadingListTests */,
 				E4E0BB141AFBC9E4008D6260 /* Shared */,
+				E6F9650D1B2F1CF20034B023 /* SharedTests */,
 				2FCAE21B1ABB51F800877008 /* Storage */,
 				2FCAE22A1ABB51F800877008 /* StorageTests */,
 				28CE83B91A1D1D3200576538 /* Sync */,
@@ -2371,6 +2422,7 @@
 				282731681ABC9BE700AA1954 /* SyncTests.xctest */,
 				E4D567181ADECE2700F1EFE7 /* ReadingList.framework */,
 				E4D567221ADECE2700F1EFE7 /* ReadingListTests.xctest */,
+				E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2806,6 +2858,25 @@
 			productReference = E4D567221ADECE2700F1EFE7 /* ReadingListTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E6F9650B1B2F1CF20034B023 /* SharedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6F965381B2F1CF20034B023 /* Build configuration list for PBXNativeTarget "SharedTests" */;
+			buildPhases = (
+				E6F965081B2F1CF20034B023 /* Sources */,
+				E6F965091B2F1CF20034B023 /* Frameworks */,
+				E6F9650A1B2F1CF20034B023 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6F965141B2F1CF20034B023 /* PBXTargetDependency */,
+				E6F9653A1B2F1D330034B023 /* PBXTargetDependency */,
+			);
+			name = SharedTests;
+			productName = SharedTests;
+			productReference = E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F84B21BD1A090F8100AAB793 /* Client */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F84B21DD1A090F8100AAB793 /* Build configuration list for PBXNativeTarget "Client" */;
@@ -2937,6 +3008,9 @@
 						CreatedOnToolsVersion = 6.3;
 						TestTargetID = F84B21BD1A090F8100AAB793;
 					};
+					E6F9650B1B2F1CF20034B023 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					F84B21BD1A090F8100AAB793 = {
 						CreatedOnToolsVersion = 6.1;
 						SystemCapabilities = {
@@ -3041,6 +3115,7 @@
 				282731671ABC9BE700AA1954 /* SyncTests */,
 				E4D567171ADECE2700F1EFE7 /* ReadingList */,
 				E4D567211ADECE2700F1EFE7 /* ReadingListTests */,
+				E6F9650B1B2F1CF20034B023 /* SharedTests */,
 			);
 		};
 /* End PBXProject section */
@@ -3364,6 +3439,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6F9650A1B2F1CF20034B023 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F84B21BC1A090F8100AAB793 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3534,6 +3616,7 @@
 				288A2DB01AB8B37E0023ABC3 /* Deferred.swift in Sources */,
 				288A2DB51AB8B38D0023ABC3 /* Error.swift in Sources */,
 				288A2DB61AB8B38D0023ABC3 /* Result.swift in Sources */,
+				E6F9653F1B2F242E0034B023 /* NSAttributedStringExtensions.swift in Sources */,
 				288A2DAC1AB8B3700023ABC3 /* MutableBox.swift in Sources */,
 				2FDE87501ABA3E93005317B1 /* HexExtensions.swift in Sources */,
 				287DAA1F1AE06E5D0055AC35 /* DeviceInfo.swift in Sources */,
@@ -3742,6 +3825,15 @@
 				E4D5676D1ADECE8100F1EFE7 /* ReadingListBasicAuthAuthenticator.swift in Sources */,
 				E4D5678D1ADECE8100F1EFE7 /* ReadingListStorage.swift in Sources */,
 				E4D567851ADECE8100F1EFE7 /* ReadingListResponse.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6F965081B2F1CF20034B023 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6F965421B2F25110034B023 /* NSAttributedStringExtensionsTests.swift in Sources */,
+				E6F9653C1B2F1D5D0034B023 /* NSURLExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4111,6 +4203,16 @@
 			isa = PBXTargetDependency;
 			target = E4D567171ADECE2700F1EFE7 /* ReadingList */;
 			targetProxy = E4D5672D1ADECE2800F1EFE7 /* PBXContainerItemProxy */;
+		};
+		E6F965141B2F1CF20034B023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 288A2D851AB8B3260023ABC3 /* Shared */;
+			targetProxy = E6F965131B2F1CF20034B023 /* PBXContainerItemProxy */;
+		};
+		E6F9653A1B2F1D330034B023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F84B21BD1A090F8100AAB793 /* Client */;
+			targetProxy = E6F965391B2F1D330034B023 /* PBXContainerItemProxy */;
 		};
 		F84B21D51A090F8100AAB793 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -6001,6 +6103,159 @@
 			};
 			name = FennecNightly;
 		};
+		E6F965151B2F1CF20034B023 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Shared/Shared-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		E6F965161B2F1CF20034B023 /* FennecAurora */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Shared/Shared-Bridging-Header.h";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = FennecAurora;
+		};
+		E6F965171B2F1CF20034B023 /* Firefox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Shared/Shared-Bridging-Header.h";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Firefox;
+		};
+		E6F965181B2F1CF20034B023 /* FennecNightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Shared/Shared-Bridging-Header.h";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = FennecNightly;
+		};
 		F84B21DB1A090F8100AAB793 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6395,6 +6650,17 @@
 				E4D567351ADECE2900F1EFE7 /* FennecAurora */,
 				E448FCAB1AEE7A6000869B6C /* Firefox */,
 				E4D567361ADECE2900F1EFE7 /* FennecNightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = FennecAurora;
+		};
+		E6F965381B2F1CF20034B023 /* Build configuration list for PBXNativeTarget "SharedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6F965151B2F1CF20034B023 /* Debug */,
+				E6F965161B2F1CF20034B023 /* FennecAurora */,
+				E6F965171B2F1CF20034B023 /* Firefox */,
+				E6F965181B2F1CF20034B023 /* FennecNightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = FennecAurora;

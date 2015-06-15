@@ -4,6 +4,7 @@
 
 import Foundation
 import UIKit
+import Shared
 
 protocol BrowserLocationViewDelegate {
     func browserLocationViewDidTapLocation(browserLocationView: BrowserLocationView)
@@ -138,26 +139,10 @@ class BrowserLocationView : UIView, UIGestureRecognizerDelegate {
     var url: NSURL? {
         didSet {
             lockImageView.hidden = (url?.scheme != "https")
-
-            if let urlString = url?.absoluteString {
-
-                var truncatedURL: String
-                if let scheme = url?.scheme {
-                    truncatedURL = urlString.substringFromIndex(advance(urlString.startIndex, count(scheme) + count("://")))
-                } else {
-                    truncatedURL = urlString
-                }
-                locationLabel.text = truncatedURL
-
-                if let host = url?.host {
-                    let nsTruncatedURL = truncatedURL as NSString
-                    let hostRange = nsTruncatedURL.rangeOfString(host)
-                    var attributedURLString = NSMutableAttributedString(string: truncatedURL)
-                    attributedURLString.addAttribute(NSForegroundColorAttributeName, value: BrowserLocationViewUX.HostFontColor, range: hostRange)
-                    locationLabel.attributedText = attributedURLString
-                }
-            } else {
-                locationLabel.attributedText = BrowserLocationView.PlaceholderText
+            if let httplessURL = url?.absoluteStringWithoutHTTPScheme(), let hostWithoutSubdomain = url?.hostStringWithoutSubdomains() {
+                var attributedString = NSAttributedString(string: httplessURL)
+                attributedString = attributedString.colorSubstring(hostWithoutSubdomain, withColor: BrowserLocationViewUX.HostFontColor)
+                locationLabel.attributedText = attributedString
             }
 
             setNeedsUpdateConstraints()
