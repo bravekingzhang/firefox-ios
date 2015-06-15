@@ -515,6 +515,9 @@
 		E6F9653C1B2F1D5D0034B023 /* NSURLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9653B1B2F1D5D0034B023 /* NSURLExtensionsTests.swift */; };
 		E6F9653F1B2F242E0034B023 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */; };
 		E6F965421B2F25110034B023 /* NSAttributedStringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F965411B2F25110034B023 /* NSAttributedStringExtensionsTests.swift */; };
+		E6F9657B1B2F5EE50034B023 /* EffectiveTLDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9657A1B2F5EE50034B023 /* EffectiveTLDUtils.swift */; };
+		E6F9659C1B2F5F800034B023 /* effective_tld_names.dat in Resources */ = {isa = PBXBuildFile; fileRef = E6F9659B1B2F5F800034B023 /* effective_tld_names.dat */; };
+		E6F9659E1B2F63A20034B023 /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9659D1B2F63A20034B023 /* NSStringExtensions.swift */; };
 		F84B21DA1A090F8100AAB793 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21D91A090F8100AAB793 /* ClientTests.swift */; };
 		F84B22041A0910F600AAB793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21E51A0910F600AAB793 /* AppDelegate.swift */; };
 		F84B220B1A0910F600AAB793 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84B21EF1A0910F600AAB793 /* Images.xcassets */; };
@@ -1457,6 +1460,9 @@
 		E6F9653B1B2F1D5D0034B023 /* NSURLExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLExtensionsTests.swift; sourceTree = "<group>"; };
 		E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		E6F965411B2F25110034B023 /* NSAttributedStringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionsTests.swift; sourceTree = "<group>"; };
+		E6F9657A1B2F5EE50034B023 /* EffectiveTLDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectiveTLDUtils.swift; sourceTree = "<group>"; };
+		E6F9659B1B2F5F800034B023 /* effective_tld_names.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effective_tld_names.dat; sourceTree = "<group>"; };
+		E6F9659D1B2F63A20034B023 /* NSStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExtensions.swift; sourceTree = "<group>"; };
 		F84B21BE1A090F8100AAB793 /* Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84B21D31A090F8100AAB793 /* FennecAurora.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FennecAurora.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84B21D81A090F8100AAB793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1704,6 +1710,7 @@
 				0BB5B2BB1AC0AB9F0052877D /* UIImage+Extensions.swift */,
 				E6A99D761B20D95800006EDD /* GeometryExtensions.swift */,
 				E6F9653D1B2F235A0034B023 /* NSAttributedStringExtensions.swift */,
+				E6F9659D1B2F63A20034B023 /* NSStringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2226,6 +2233,8 @@
 		E42CCDFF1A24C4E300B794D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E6F9657A1B2F5EE50034B023 /* EffectiveTLDUtils.swift */,
+				E6F9659B1B2F5F800034B023 /* effective_tld_names.dat */,
 				0B3E7DB51B27A7E900E2E84D /* AboutUtils.swift */,
 				E4C358531AF1440B00299F7E /* Swizzling.h */,
 				E4252A0D1AF01AE40028C684 /* Swizzling.m */,
@@ -3380,6 +3389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F9659C1B2F5F800034B023 /* effective_tld_names.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3600,6 +3610,7 @@
 				282730F11ABC99C100AA1954 /* Functions.swift in Sources */,
 				D339C2831AD354B400C087BD /* Loader.swift in Sources */,
 				288501FB1AC0F63800E7F670 /* NSScannerExtensions.swift in Sources */,
+				E6F9659E1B2F63A20034B023 /* NSStringExtensions.swift in Sources */,
 				288A2DAA1AB8B3700023ABC3 /* Box.swift in Sources */,
 				281B2C081ADF4F29002917DC /* DeferredUtils.swift in Sources */,
 				2FDE87521ABA3EA0005317B1 /* TimeConstants.swift in Sources */,
@@ -3890,6 +3901,7 @@
 				D31A0FC71A65D6D000DC8C7E /* SearchSuggestClient.swift in Sources */,
 				D38B2D311A8D96D00040E6B5 /* GCDWebServerConnection.m in Sources */,
 				D38B2D401A8D96D00040E6B5 /* GCDWebServerFileRequest.m in Sources */,
+				E6F9657B1B2F5EE50034B023 /* EffectiveTLDUtils.swift in Sources */,
 				E4252A0E1AF01AE40028C684 /* Swizzling.m in Sources */,
 				D38B2D4F1A8D96D00040E6B5 /* GCDWebServerFileResponse.m in Sources */,
 				E43A4E551A96B88100E25676 /* GCDWebServerDataRequest.m in Sources */,
